@@ -1,7 +1,5 @@
 # Worldle_solver_Mickael_Valisoa
 
-# Wordle Solver
-
 ## 📖 Présentation du projet
 Ce projet est un **solver pour le jeu Wordle**, réalisé dans le cadre du TP de Systèmes d’Exploitation.  
 Le programme permet de filtrer une base de mots (`bdd_wordle.txt`) afin de réduire progressivement la liste et trouver la solution du Wordle.
