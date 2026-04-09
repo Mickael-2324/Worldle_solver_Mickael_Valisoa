@@ -3,53 +3,53 @@
 #include "filters.h"
 
 int main() {
-    char words[MAX_WORDS][WORD_LEN];
-    int count = 0;
-
+    // 🔎 Lecture du fichier dans le dossier ressource
     FILE *f = fopen("ressource/bdd_wordle.txt", "r");
     if (!f) {
         perror("Erreur ouverture fichier");
         return 1;
     }
 
-    while (fscanf(f, "%5s", words[count]) == 1) {
-        count++;
+    char words[MAX_WORDS][MAX_LEN];
+    int n = 0;
+
+    // Lecture des mots du fichier
+    while (fscanf(f, "%49s", words[n]) == 1 && n < MAX_WORDS) {
+        n++;
     }
     fclose(f);
 
-    printf("=== Wordle Solver ===\n");
-    printf("Nombre de mots chargés : %d\n", count);
+    printf("Nombre de mots chargés: %d\n", n);
 
-    int choix;
-    char lettre;
-    char substr[WORD_LEN];
+    char prefix[MAX_LEN] = "";
 
-    printf("\nChoisissez un filtre :\n");
-    printf("1. Inclure une lettre\n");
-    printf("2. Exclure une lettre\n");
-    printf("3. Rechercher un substring\n");
-    printf("Votre choix : ");
-    scanf("%d", &choix);
+    while (n > 1) {
+        char letter;
+        printf("Entrez une lettre: ");
+        scanf(" %c", &letter);
 
-    switch (choix) {
-        case 1:
-            printf("Entrez une lettre : ");
-            scanf(" %c", &lettre);
-            filter_contains(words, count, lettre);
+        int len = strlen(prefix);
+        prefix[len] = letter;
+        prefix[len+1] = '\0';
+
+        n = filter_words(words, n, prefix);
+
+        printf("Mots restants (%d):\n", n);
+        for (int i = 0; i < n; i++) {
+            printf("%s ", words[i]);
+        }
+        printf("\n");
+
+        if (n == 0) {
+            printf("Aucun mot trouvé.\n");
             break;
-        case 2:
-            printf("Entrez une lettre : ");
-            scanf(" %c", &lettre);
-            filter_exclude(words, count, lettre);
-            break;
-        case 3:
-            printf("Entrez un substring : ");
-            scanf("%s", substr);
-            filter_substring(words, count, substr);
-            break;
-        default:
-            printf("Choix invalide.\n");
+        }
+    }
+
+    if (n == 1) {
+        printf("Mot trouvé: %s\n", words[0]);
     }
 
     return 0;
 }
+

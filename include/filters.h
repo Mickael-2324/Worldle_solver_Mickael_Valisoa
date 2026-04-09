@@ -1,12 +1,12 @@
 #ifndef FILTERS_H
 #define FILTERS_H
 
-#define MAX_WORDS 10000
-#define WORD_LEN  6
+#define MAX_WORDS 5000
+#define MAX_LEN   50
 
-// Filtres disponibles
-void filter_contains(char words[MAX_WORDS][WORD_LEN], int count, char letter);
-void filter_exclude(char words[MAX_WORDS][WORD_LEN], int count, char letter);
-void filter_substring(char words[MAX_WORDS][WORD_LEN], int count, const char *substr);
+// Filtre les mots qui commencent par le préfixe donné.
+// Retourne le nouveau nombre de mots.
+int filter_words(char words[][MAX_LEN], int n, const char *prefix);
 
 #endif
+
