@@ -1,4 +1,5 @@
 # Worldle_solver_Mickael_Valisoa
+
 # Wordle Solver
 
 ## 📖 Présentation du projet
@@ -21,3 +22,9 @@ Cloner le projet :
 ```bash
 git clone https://github.com/nom1/wordle_solver_nom1_nom2.git
 cd wordle_solver_nom1_nom2
+
+Pour compiler : 
+gcc -Iinclude src/*.c -o bin/solver
+
+Pour exécuter : 
+./bin/solver
