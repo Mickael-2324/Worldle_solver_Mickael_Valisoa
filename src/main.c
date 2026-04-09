@@ -25,7 +25,7 @@ int main() {
 
     while (n > 1) {
         char letter;
-        printf("Entrez une lettre: ");
+        printf("Entrez une (ou des) lettre(s): ");
         scanf(" %c", &letter);
 
         int len = strlen(prefix);
